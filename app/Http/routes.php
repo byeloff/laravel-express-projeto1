@@ -18,8 +18,13 @@ Route::get('blog', 'PostsController@index');
 Route::get('posts', 'PostController@getAllPosts');
 Route::get('post/{id}', 'PostController@getPost');
 
+Route::controllers([
+  'auth' => 'Auth\AuthController',
+  'password' => 'Auth\PasswordController'
+]);
+
 // Admin
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 
   Route::group(['prefix' => 'posts'], function(){
 
